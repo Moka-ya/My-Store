@@ -1,3 +1,7 @@
 
-body { font-family: sans-serif; direction: rtl; padding: 20px; background: #f9f9f9; }
-label, select, p { display: block; margin: 10px 0; }
+body { font-family: Arial; direction: rtl; background: #f9f9f9; margin: 0; padding: 0; }
+header { background: #333; color: white; padding: 1em; text-align: center; }
+nav ul { list-style: none; padding: 0; display: flex; justify-content: center; gap: 1em; }
+nav a { color: white; text-decoration: none; }
+#products { display: flex; flex-wrap: wrap; justify-content: center; padding: 1em; gap: 1em; }
+.product-card { background: white; padding: 1em; border: 1px solid #ccc; width: 200px; text-align: center; }

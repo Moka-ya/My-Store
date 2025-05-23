@@ -2,23 +2,26 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>متجر إلكتروني</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1 id="label-checkout">إتمام الشراء</h1>
-    <label id="label-select-wilaya">اختر الولاية</label>
-    <select id="wilaya"></select>
-    <p><span id="label-delivery">رسوم التوصيل</span>: <span id="shipping">0</span> دج</p>
-    <p><span id="label-total">المجموع الكلي</span>: <span id="total">0</span> دج</p>
-    <p><span id="label-cod">الدفع عند التوصيل</span></p>
-    <label>اللغة:</label>
-    <select id="lang">
-        <option value="ar">العربية</option>
-        <option value="fr">Français</option>
-        <option value="en">English</option>
-    </select>
+    <header>
+        <h1>مرحبا بك في متجرنا</h1>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="filterCategory('رجالي')">ملابس رجالية</a></li>
+                <li><a href="#" onclick="filterCategory('نسائي')">ملابس نسائية</a></li>
+                <li><a href="#" onclick="filterCategory('أطفال')">ملابس أطفال</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="products"></div>
+        <button onclick="goToCart()">عرض السلة</button>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
