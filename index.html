@@ -1,27 +1,102 @@
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>متجر إلكتروني</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متجر إلكتروني</title>
+  <style>
+    body { font-family: Arial, sans-serif; direction: rtl; text-align: right; margin: 0; padding: 0; background: #f4f4f4; }
+    header, nav, main, footer { padding: 20px; }
+    header { background: #222; color: white; }
+    nav { background: #ddd; }
+    nav button { margin: 5px; padding: 10px; }
+    .product { border: 1px solid #ccc; margin: 10px; padding: 10px; background: white; display: inline-block; width: 200px; }
+    #cart { background: #eee; padding: 10px; }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>مرحبا بك في متجرنا</h1>
-        <nav>
-            <ul>
-                <li><a href="#" onclick="filterCategory('رجالي')">ملابس رجالية</a></li>
-                <li><a href="#" onclick="filterCategory('نسائي')">ملابس نسائية</a></li>
-                <li><a href="#" onclick="filterCategory('أطفال')">ملابس أطفال</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <div id="products"></div>
-        <button onclick="goToCart()">عرض السلة</button>
-    </main>
-    <script src="script.js"></script>
+  <header>
+    <h1>متجر الملابس</h1>
+    <select id="language">
+      <option value="ar">العربية</option>
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+    </select>
+  </header>
+  <nav>
+    <button onclick="filterProducts('رجالي')">رجالي</button>
+    <button onclick="filterProducts('نسائي')">نسائي</button>
+    <button onclick="filterProducts('أطفال')">أطفال</button>
+  </nav>
+  <main>
+    <section id="products"></section>
+    <hr>
+    <section id="cart">
+      <h2>سلة الشراء</h2>
+      <div id="cart-items"></div>
+      <label>اختر الولاية:
+        <select id="wilaya" onchange="calculateShipping()">
+          <option value="الجزائر">الجزائر</option>
+          <option value="وهران">وهران</option>
+          <option value="سطيف">سطيف</option>
+        </select>
+      </label>
+      <p>سعر الشحن: <span id="shipping">0</span> دج</p>
+      <p>المجموع الكلي: <span id="total">0</span> دج</p>
+    </section>
+  </main>
+  <script>
+    const products = [
+      { name: "قميص رجالي", category: "رجالي", price: 2000 },
+      { name: "فستان نسائي", category: "نسائي", price: 3500 },
+      { name: "بنطال أطفال", category: "أطفال", price: 1500 }
+    ];
+
+    let cart = [];
+
+    function renderProducts(category = null) {
+      const container = document.getElementById('products');
+      container.innerHTML = '';
+      products.filter(p => !category || p.category === category)
+              .forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = `<h3>${p.name}</h3><p>${p.price} دج</p>
+                         <button onclick='addToCart(${JSON.stringify(p)})'>أضف إلى السلة</button>`;
+        container.appendChild(div);
+      });
+    }
+
+    function addToCart(product) {
+      cart.push(product);
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById('cart-items');
+      cartItems.innerHTML = cart.map((p, i) => `<p>${p.name} - ${p.price} دج
+        <button onclick="removeFromCart(${i})">حذف</button></p>`).join('');
+      calculateShipping();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      renderCart();
+    }
+
+    function calculateShipping() {
+      const wilaya = document.getElementById('wilaya').value;
+      const shipping = wilaya === 'وهران' ? 400 : wilaya === 'سطيف' ? 500 : 300;
+      const total = cart.reduce((sum, p) => sum + p.price, 0) + shipping;
+      document.getElementById('shipping').innerText = shipping;
+      document.getElementById('total').innerText = total;
+    }
+
+    function filterProducts(cat) {
+      renderProducts(cat);
+    }
+
+    renderProducts();
+  </script>
 </body>
 </html>
