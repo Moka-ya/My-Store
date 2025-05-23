@@ -1,7 +1,45 @@
 
-body { font-family: Arial; direction: rtl; background: #f9f9f9; margin: 0; padding: 0; }
-header { background: #333; color: white; padding: 1em; text-align: center; }
-nav ul { list-style: none; padding: 0; display: flex; justify-content: center; gap: 1em; }
-nav a { color: white; text-decoration: none; }
-#products { display: flex; flex-wrap: wrap; justify-content: center; padding: 1em; gap: 1em; }
-.product-card { background: white; padding: 1em; border: 1px solid #ccc; width: 200px; text-align: center; }
+body {
+  font-family: 'Arial', sans-serif;
+  direction: rtl;
+  background: #f4f4f4;
+  margin: 0;
+}
+header {
+  background: #222;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+}
+.language-switcher button {
+  margin: 0 5px;
+}
+main {
+  padding: 20px;
+}
+.product {
+  border: 1px solid #ccc;
+  background: white;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+  width: 200px;
+}
+#cart {
+  background: #eee;
+  padding: 10px;
+  margin-top: 20px;
+}
